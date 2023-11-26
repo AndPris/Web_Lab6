@@ -21,7 +21,6 @@
 
 
 	<body class="body_style">
-
 		<header class="left-center">
 
 			<h3 id="x" class="border">Flex-верстка</h3>
@@ -59,7 +58,7 @@
 
 
 					<section class="section3 border">
-						<form action="save_data.php" method="post">
+						<form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method="post">
 							Title:<input type="text"><br>
 							Data:<input type="text"><br>
 							<input type="submit">
