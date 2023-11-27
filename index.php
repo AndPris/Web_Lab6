@@ -15,22 +15,8 @@
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				if(empty($_POST['title']))
 					$titleErr="Title is required";
-				else {
-					$conn = new mysqli("sql106.infinityfree.com", "if0_35501733", "zbE95UqqYTVM", "if0_35501733_lab6_tabs");
-					if ($conn->connect_error)
-    					die("Connection failed: " . $conn->connect_error);
-    				
-    				$title = $_POST['title'];
-    				$data = $_POST['data'];
-
-					$sql="INSERT INTO tabs(title, data) VALUES('$title', '$data');";
-
-					if($conn->query($sql))
-						echo "Value inserted";
-					else
-						echo "Error insertion";
-					$conn->close();
-				}
+				else
+					include 'save_data.php';
 			}		
 		?>
 
@@ -98,7 +84,7 @@
 
 				<p>Цей сайт зроблено за допомогою Flex-верстки. Здійснено адаптацію для смартфону.</p>
 
-				<p><a href="email_page.html">Поштова верстка</a></p>
+				<p><a href="email_page.html">Друга сторінка</a></p>
 
 			</section>
 
@@ -110,7 +96,7 @@
 
 		<footer class="left-center border">
 
-			<h3 class="border">Лабораторна робота №3</h3>
+			<h3 class="border">Лабораторна робота №6</h3>
 
 			<p><em>Виконав Присяжний Андрій, ІП-22, всі матеріали взято з Вікіпедії. </em></p>
 
