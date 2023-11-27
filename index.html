@@ -9,99 +9,64 @@
 	</head>
 
 	<body class="body_style">
-		<?php 
-			$titleErr = "";
+		<script>
+			async function saveData() {
+				let formData = new FormData(document.getElementById("creationForm"));
 
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				if(empty($_POST['title']))
-					$titleErr="Title is required";
-				else
-					include 'save_data.php';
-			}		
-		?>
+				let response = await fetch('save_data.php', {
+												method: 'POST',
+												body: formData
+				});
+				let data = await response.text();
+				alert(data);
+			}
+		</script>
 
 		<header class="left-center">
 
 			<h3 id="x" class="border">Flex-верстка</h3>
 
 			<p>Iron Maiden — британський рок-гурт з Лейтона, Лондон, заснований у 1975 році. Гурт вважають одними із найпопулярніших і найвагоміших виконавців у стилі хеві-метал, частиною «Нової хвилі британського важкого металу» (NWOBHM). Iron Maiden продав більше 120 мільйонів альбомів у всьому світі; три з них досягли першого місця і 15 потрапили в Тор 10 хіт-параді одної лише Британії.</p>
-
 		</header>
 
-
-
-
-
 		<main>
-
 			<section class="section235 border">
-
 				<section class="section23 border">
-
 					<section class="section2 item-right border">
-
 						<ol> Студійні альбоми:
-
 							<li>Iron Maiden</li>
-
 							<li>The Number of the Beast</li>
-
 							<li>Fear of the Dark</li>
-
 							<li>Brave New World</li>
-
 						</ol>
-
 					</section>
-
-
 
 					<section class="section3 border">
-						<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
-							Title:<input type="text" name="title"><?php echo $titleErr;?><br>
+						<form id="creationForm">
+							Title:<input type="text" name="title"><br>
 							Data:<input type="text" name="data"><br>
-							<input type="submit">
+							<button type="button" onclick="saveData()">Зберегти</button>
 						</form>
 					</section>
-
 				</section>
-
-
-
-
 
 				<section class="section5 border">
-
 					<p>Всього Iron Maiden випустили 17 студійних альбомів</p>
-
 				</section>
-
 			</section>
 
 			
 
 			<section class="section4 item-right border">
-
 				<p>Цей сайт зроблено за допомогою Flex-верстки. Здійснено адаптацію для смартфону.</p>
-
 				<p><a href="email_page.html">Друга сторінка</a></p>
-
 			</section>
-
 		</main>
 
-
-
-
-
 		<footer class="left-center border">
-
 			<h3 class="border">Лабораторна робота №6</h3>
-
 			<p><em>Виконав Присяжний Андрій, ІП-22, всі матеріали взято з Вікіпедії. </em></p>
-
 		</footer>
-
 	</body>
 
 
