@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 
 <html lang="en-UA">
-
-
-
 	<head>
-
 		<link rel="stylesheet" type="text/css" href="main_page_styles.css">
-
 		<meta charset="utf-8">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<title>Main site</title>
-
 	</head>
 
-
-
-
-
 	<body class="body_style">
+		<?php 
+			$titleErr = "";
+
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				if(empty($_POST['title']))
+					$titleErr="Title is required";
+				else {
+					$conn = new mysqli("sql106.infinityfree.com", "if0_35501733", "zbE95UqqYTVM", "if0_35501733_lab6_tabs");
+					if ($conn->connect_error)
+    					die("Connection failed: " . $conn->connect_error);
+    				
+    				$title = $_POST['title'];
+    				$data = $_POST['data'];
+
+					$sql="INSERT INTO tabs(title, data) VALUES('$title', '$data');";
+
+					if($conn->query($sql))
+						echo "Value inserted";
+					else
+						echo "Error insertion";
+					$conn->close();
+				}
+			}		
+		?>
+
 		<header class="left-center">
 
 			<h3 id="x" class="border">Flex-верстка</h3>
@@ -58,9 +71,9 @@
 
 
 					<section class="section3 border">
-						<form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method="post">
-							Title:<input type="text"><br>
-							Data:<input type="text"><br>
+						<form method="post" action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>
+							Title:<input type="text" name="title"><?php echo $titleErr;?><br>
+							Data:<input type="text" name="data"><br>
 							<input type="submit">
 						</form>
 					</section>
