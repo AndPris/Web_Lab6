@@ -14,6 +14,20 @@
 	<body class="body_style">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 
+		<script>
+			async function fetchData() {
+				let response = await fetch('get_data.php');
+				let data = await response.json();
+
+				data.forEach(item => {
+					let message = "Title: " + item.title + ", data: " + item.data;
+					alert(message);
+				});
+			}
+
+			fetchData();
+		</script>
+
 		<header class="left-center">
 
 			<h3 id="x" class="border">Flex</h3>
