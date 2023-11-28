@@ -9,23 +9,6 @@
 	</head>
 
 	<body class="body_style">
-		<script>
-			function loadScript(src) {
-			  return new Promise(function(resolve, reject) {
-			    let script = document.createElement('script');
-			    script.src = src;
-
-			    script.onload = resolve;
-			    script.onerror = reject;
-
-			    document.head.append(script);
-			  });
-			}
-
-			loadScript('tabs_handler.js').then(() => {fetchData();}).catch((error) => {
-		        console.error('Error loading script:', error);
-		    });;
-		</script>
 		<header class="left-center">
 
 			<h3 id="x" class="border">Flex-верстка</h3>
@@ -64,6 +47,7 @@
 
 					<section class="section3 border" id="tabsContainer">
 						<section class="tab" id="tabLinksContainer"></section>
+						<section id="tabDataContainer"></section>
 					</section>
 
 				</section>
@@ -104,6 +88,25 @@
 
 		</footer>
 
+		<script>
+			function loadScript(src) {
+			  return new Promise(function(resolve, reject) {
+			    let script = document.createElement('script');
+			    script.src = src;
+
+			    script.onload = resolve;
+			    script.onerror = reject;
+
+			    document.head.append(script);
+			  });
+			}
+
+			let promise = loadScript('tabs_handler.js');
+			promise.then(() => {fetchUpdates();});
+			promise.catch((error) => {
+		        console.error('Error loading script:', error);
+		    });;
+		</script>	
 	</body>
 
 

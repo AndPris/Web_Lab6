@@ -13,18 +13,10 @@ function openTab(evt, tabId) {
 	evt.currentTarget.className += " active";
 }
 
-function deleteAllCHildren(element) {
-	while (element.firstChild)
-            element.removeChild(element.firstChild);
-}
-
 function createTab(data) {
-	let tabsContainer = document.getElementById('tabsContainer');
+	let tabDataContainer = document.getElementById('tabDataContainer');
 	let tabLinksContainer = document.getElementById('tabLinksContainer');
 
-	deleteAllCHildren(tabsContainer);
-	deleteAllCHildren(tabLinksContainer);
-	
 	let tabContentID = data.number.toString() + data.title;
 
 	let tabContent = document.createElement('section');
@@ -39,15 +31,21 @@ function createTab(data) {
 	tabButton.onclick = () => openTab(event, tabContentID);
 	tabButton.textContent = data.title;
 
-	tabsContainer.append(tabContent);
+	tabDataContainer.append(tabContent);
 	tabLinksContainer.append(tabButton);
 }
 
-async function fetchData() {
+function createAllTabs(data, from) {
+	for(let i = from; i < data.length; ++i)
+		createTab(data[i]);
+}
+
+async function fetchUpdates() {
 	let response = await fetch('get_data.php');
 	let data = await response.json();
 
-	data.forEach(item => {
-		createTab(item);
-	});
+	let tabDataContainer = document.getElementById('tabDataContainer');
+	if(data.length > tabDataContainer.childElementCount)
+		createAllTabs(data, tabDataContainer.childElementCount);
+	setTimeout(() => fetchUpdates(), 5000);
 }
