@@ -10,34 +10,21 @@
 
 	<body class="body_style">
 		<script>
-			async function fetchData() {
-				let response = await fetch('get_data.php');
-				let data = await response.json();
+			function loadScript(src) {
+			  return new Promise(function(resolve, reject) {
+			    let script = document.createElement('script');
+			    script.src = src;
 
-				data.forEach(item => {
-					let message = "Title: " + item.title + ", data: " + item.data;
-					alert(message);
-				});
+			    script.onload = resolve;
+			    script.onerror = reject;
+
+			    document.head.append(script);
+			  });
 			}
 
-			fetchData();
-		</script>
-
-		<script>
-			function openTab(evt, cityName) {
-			  let tabcontent, tablinks;
-
-			  tabcontent = document.querySelectorAll(".tabcontent");
-			  for (let i = 0; i < tabcontent.length; i++)
-			    tabcontent[i].style.display = "none";
-
-			  tablinks = document.querySelectorAll(".tablinks");
-			  for (let i = 0; i < tablinks.length; i++)
-			    tablinks[i].className = tablinks[i].className.replace(" active", "");
-
-			  document.getElementById(cityName).style.display = "block";
-			  evt.currentTarget.className += " active";
-			}
+			loadScript('tabs_handler.js').then(() => {fetchData();}).catch((error) => {
+		        console.error('Error loading script:', error);
+		    });;
 		</script>
 		<header class="left-center">
 
@@ -75,27 +62,8 @@
 
 
 
-					<section class="section3 border">
-						<section class="tab">
-						  <button class="tablinks" onclick="openTab(event, 'London')">London</button>
-						  <button class="tablinks" onclick="openTab(event, 'Paris')">Paris</button>
-						  <button class="tablinks" onclick="openTab(event, 'Tokyo')">Tokyo</button>
-						</section>
-
-						<section id="London" class="tabcontent">
-						  <h3>London</h3>
-						  <p>London is the capital city of England.</p>
-						</section>
-
-						<section id="Paris" class="tabcontent">
-						 <h3>Paris</h3>
-						  <p>Paris is the capital of France.</p>
-						</section>
-
-						<section id="Tokyo" class="tabcontent">
-						  <h3>Tokyo</h3>
-						  <p>Tokyo is the capital of Japan.</p>
-						</section>
+					<section class="section3 border" id="tabsContainer">
+						<section class="tab" id="tabLinksContainer"></section>
 					</section>
 
 				</section>

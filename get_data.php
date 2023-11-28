@@ -3,7 +3,7 @@
 	if ($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 
-	$sql="SELECT title, data FROM tabs;";
+	$sql="SELECT number, title, data FROM tabs;";
 
 	$result = $conn->query($sql);
 	$conn->close();
