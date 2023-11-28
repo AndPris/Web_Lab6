@@ -11,7 +11,8 @@
 	<body class="body_style">
 		<script>
 			async function saveData() {
-				let formData = new FormData(document.getElementById("creationForm"));
+				let form = document.getElementById("creationForm");
+				let formData = new FormData(form);
 
 				let response = await fetch('save_data.php', {
 												method: 'POST',
@@ -19,6 +20,9 @@
 				});
 				let data = await response.text();
 				alert(data);
+
+				form.elements.title.value = "";
+				form.elements.data.value = "";
 			}
 		</script>
 

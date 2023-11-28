@@ -13,10 +13,18 @@ function openTab(evt, tabId) {
 	evt.currentTarget.className += " active";
 }
 
+function deleteAllCHildren(element) {
+	while (element.firstChild)
+            element.removeChild(element.firstChild);
+}
+
 function createTab(data) {
 	let tabsContainer = document.getElementById('tabsContainer');
 	let tabLinksContainer = document.getElementById('tabLinksContainer');
 
+	deleteAllCHildren(tabsContainer);
+	deleteAllCHildren(tabLinksContainer);
+	
 	let tabContentID = data.number.toString() + data.title;
 
 	let tabContent = document.createElement('section');
